@@ -1,23 +1,12 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:bloc/bloc.dart';
+import 'package:flutter/widgets.dart';
 
-import 'counter_cubit.dart';
-import 'counter_page.dart';
+import 'app.dart';
+import 'counter_observer.dart';
 
 void main() {
-  runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: BlocProvider(
-        create: (context) => CounterCubit(),
-        child: CounterPage(),
-      ),
-    );
-  }
+  BlocOverrides.runZoned(
+        () => runApp(const CounterApp()),
+    blocObserver: CounterObserver(),
+  );
 }
