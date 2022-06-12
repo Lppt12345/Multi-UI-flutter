@@ -9,16 +9,22 @@ import '../cubit/counter_cubit.dart';
 /// [CounterCubit] state and notifies it in response to user input.
 /// {@endtemplate}
 class CounterView extends StatelessWidget {
+  const CounterView({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
     return Scaffold(
       appBar: AppBar(title: const Text('Counter')),
       body: Center(
-        child: BlocBuilder<CounterCubit, int>(
-          builder: (context, state) {
-            return Text('$state', style: textTheme.headline2);
-          },
+        // Dungf context.watch cunxg ok cho de dung
+        // child: BlocBuilder<CounterCubit, int>(
+        //   builder: (context, state) {
+        //     return Text('$state', style: textTheme.headline2);
+        //   },
+        child: Text(
+          context.watch<CounterCubit>().state.toString(),
+          style: textTheme.headline2,
         ),
       ),
       floatingActionButton: Column(
